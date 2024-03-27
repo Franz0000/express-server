@@ -19,7 +19,7 @@ app.listen(port,() =>{
 })
 
 //setup database
-mongoose.connect(`mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@cluster0.czegh.mongodb.net/NODE-API?retryWrites=true&w=majority&appName=Cluster0`)
+mongoose.connect(`mongodb+srv://admin:NewPa$$w0rd@cluster0.czegh.mongodb.net/NODE-API?retryWrites=true&w=majority&appName=Cluster0`)
   .then(() => Logger.log('debug', '[DBCONNECTION]',{message:'Database Connected!'}))
   .catch((error) =>{
     Logger.log('error', '[DBCONNECTION]', {error: error})
