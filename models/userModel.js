@@ -1,6 +1,6 @@
 const mongoose  = require("mongoose");
 
-const userSchema = mongoose.Schema({
+const userSchema =  mongoose.Schema({
     firstName:{type:String,required:[true,"first name is required for this action."]},
     middleName:{type:String,required:[true,"middle name is required for this action."]},
     lastName:{type:String,required:[true,"last name is required for this action."]},
