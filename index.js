@@ -1,82 +1,31 @@
 const express = require('express')
 const mongoose = require('mongoose');
-const User = require('./models/userModel')
+const Logger = require('./services/logger')
+const userRoutes = require('./routes/Users');
+const uploadRoutes = require('./routes/Uploads');
+
+require('dotenv').config()
 
 const app = express()
 //middleware so that the app can understand json
 app.use(express.json())
+// app.use(express.static('public'));
 
-app.listen(3000,() =>{
-    console.log(`express server app is running on port 3000`)
+
+let port = process.env.PORT || 8080;
+app.listen(port,() =>{
+  // Logger.log('debug', TAG + ACTION + ' request body', req.body);
+  Logger.log('debug', '[App] Now up and running', {port: port})
 })
 
 //setup database
-mongoose.connect('mongodb+srv://admin:NewPa$$w0rd@cluster0.czegh.mongodb.net/NODE-API?retryWrites=true&w=majority&appName=Cluster0')
-  .then(() => console.log('Server: Successfully Connected to Database'))
+mongoose.connect(`mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@cluster0.czegh.mongodb.net/NODE-API?retryWrites=true&w=majority&appName=Cluster0`)
+  .then(() => Logger.log('debug', '[DBCONNECTION]',{message:'Database Connected!'}))
   .catch((error) =>{
-    console.log(error) 
+    Logger.log('error', '[DBCONNECTION]', {error: error})
   });
 
 
 //routes
-app.get('/users', async function (request, response) {
-  try {
-    const user = await User.find({})
-    response.status(200).json(user)
-  } catch (error) {
-    console.log(error.message)
-    response.status(500).json({message:error.message})
-  }
-})
-
-app.get('/user/:id', async function (request, response) {
-  try {
-    const {id} = request.params
-    const user = await User.findById(id)
-    response.status(200).json(user)
-  } catch (error) {
-    console.log(error.message)
-    response.status(500).json({message:error.message})
-  }
-})
-
-
-app.post('/user', async(request, response) =>{
-  try {
-      const user = await User.create(request.body)
-      response.status(200).json(user)
-  } catch (error) {
-    console.log(error.message)
-    response.status(500).json({message:error.message})
-  }
-})
-
-app.put('/user/:id', async(request, response) => {
-  
-  try {
-      const {id} = request.params
-      const user = await User.findByIdAndUpdate(id, request.body)
-      if(!user){
-        return response.status(404).json({message:"No Data found on user with id: " + id})
-      }
-      const updatedUser = await User.findById(id)
-      response.status(200).json(updatedUser)
-  } catch (error) {
-    response.status(500).jason({message:error.message})
-  }
-})
-
-app.delete('/user/:id', async(request, response) => {
-  
-  try {
-      const {id} = request.params
-      const user = await User.findByIdAndDelete(id, request.body)
-      if(!user){
-        return response.status(404).json({message:"No Data found on user with id: " + id})
-      }
-      // const updatedUser = await User.findById(id)
-      response.status(200).json({message: "date successfully Deleted!"})
-  } catch (error) {
-    response.status(500).jason({message:error.message})
-  }
-})
+app.use('/users', userRoutes);
+app.use('/uploads', uploadRoutes);
