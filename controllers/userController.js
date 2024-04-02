@@ -40,6 +40,7 @@ exports.getUser = async function (request, response) {
 }
 
 exports.insertuser = async (request, response) =>{
+    var ACTION ='[INSERT-USER]'
     try {
         const user = await UserModel.create(request.body)
         Logger.log('info', TAG + ACTION + '[REFID:' + uuid +'] response', {message:"Successfully Save User data"});
