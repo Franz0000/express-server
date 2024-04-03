@@ -9,7 +9,7 @@ require('dotenv').config()
 const app = express()
 //middleware so that the app can understand json
 app.use(express.json())
-// app.use(express.static('public'));
+app.use(express.static('public'));
 
 
 let port = process.env.PORT || 8080;

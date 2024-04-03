@@ -15,6 +15,7 @@
     "dotenv": "^16.4.5",
     "env": "^0.0.2",
     "express": "^4.18.3",
+    "file-system": "^2.2.2",
     "mongoose": "^8.2.0",
     "multer": "^1.4.5-lts.1",
     "rekuire": "^0.1.9",
