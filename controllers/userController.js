@@ -41,10 +41,11 @@ exports.getUser = async function (request, response) {
 
 exports.insertuser = async (request, response) =>{
     var ACTION ='[INSERT-USER]'
+    request.body.clientId = generateRandomString()
     try {
         const user = await UserModel.create(request.body)
         Logger.log('info', TAG + ACTION + '[REFID:' + uuid +'] response', {message:"Successfully Save User data"});
-        response.status(200).json({message:"Successfully Save User data"})
+        response.status(200).json({message:"Successfully Save User data",clientId: request.body.clientId})
     } catch (error) {
         Logger.log('error', TAG + ACTION + '[REFID:' + uuid +'] response', {error: error});
         response.status(500).json({message:error.message})
@@ -84,4 +85,16 @@ exports.deleteUser = async (request, response) => {
         Logger.log('error', TAG + ACTION + '[REFID:' + uuid +'] response', {message:error.message});
         response.status(500).json({message:error.message})
     }
+}
+
+// Generate a random alphanumeric string
+function generateRandomString() {
+  const length = 30; // Set your desired length
+  const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+  let result = '';
+  for (let i = 0; i < length; i++) {
+    const randomIndex = Math.floor(Math.random() * characters.length);
+    result +=characters.charAt(randomIndex);
+  }
+  return result.toUpperCase();
 }
