@@ -8,7 +8,10 @@ const userSchema =  mongoose.Schema({
     gender:{type:String,required:[true, "gender is required for this action"]},
     email:{type:String,required:[true, "email is required for this action"]},
     userName:{type:String,required:[true, "userName is required for this action"]},
+    password:{type:String,required:[true, "password is required for this action"]},
+    clientId:{type:String,required:[true, "clientId is required for this action"]},
 },{timeStamps:true});
+
 
 const User = mongoose.model('User', userSchema);
 
