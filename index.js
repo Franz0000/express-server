@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const Logger = require('./services/logger')
 const userRoutes = require('./routes/Users');
 const uploadRoutes = require('./routes/Uploads');
-const sessionRoutes = require('./routes/sessions');
+const sessionRoutes = require('./routes/Sessions');
 
 require('dotenv').config()
 
