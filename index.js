@@ -7,9 +7,12 @@ const sessionRoutes = require('./routes/Sessions');
 
 require('dotenv').config()
 
+const cors = require('cors')
 const app = express()
+app.use(cors())
 //middleware so that the app can understand json
 app.use(express.json())
+app.use(express.urlencoded({ extended: true })); 
 app.use(express.static('public'));
 
 
