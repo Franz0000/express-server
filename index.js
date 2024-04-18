@@ -4,6 +4,7 @@ const Logger = require('./services/logger')
 const userRoutes = require('./routes/Users');
 const uploadRoutes = require('./routes/Uploads');
 const sessionRoutes = require('./routes/Sessions');
+const officialMemberRoutes = require('./routes/OfficialMember');
 
 require('dotenv').config()
 
@@ -34,3 +35,4 @@ mongoose.connect(`mongodb+srv://admin:NewPa$$w0rd@cluster0.czegh.mongodb.net/NOD
 app.use('/users', userRoutes);
 app.use('/uploads', uploadRoutes);
 app.use('/sessions', sessionRoutes);
+app.use('/officials', officialMemberRoutes);
