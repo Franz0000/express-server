@@ -5,6 +5,7 @@ const userRoutes = require('./routes/Users');
 const uploadRoutes = require('./routes/Uploads');
 const sessionRoutes = require('./routes/Sessions');
 const officialMemberRoutes = require('./routes/OfficialMember');
+const formerMemberRoutes = require('./routes/FormerMember');
 
 require('dotenv').config()
 
@@ -17,6 +18,8 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static('public'));
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Methods", "*");
+  res.header("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE");
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   next();
 });
@@ -42,3 +45,4 @@ app.use('/users', userRoutes);
 app.use('/uploads', uploadRoutes);
 app.use('/sessions', sessionRoutes);
 app.use('/officials', officialMemberRoutes);
+app.use('/former', formerMemberRoutes);
