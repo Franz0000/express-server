@@ -6,6 +6,7 @@ const uploadRoutes = require('./routes/Uploads');
 const sessionRoutes = require('./routes/Sessions');
 const officialMemberRoutes = require('./routes/OfficialMember');
 const formerMemberRoutes = require('./routes/FormerMember');
+const teachersRoutes = require('./routes/Teachers');
 
 require('dotenv').config()
 
@@ -46,3 +47,4 @@ app.use('/uploads', uploadRoutes);
 app.use('/sessions', sessionRoutes);
 app.use('/officials', officialMemberRoutes);
 app.use('/former', formerMemberRoutes);
+app.use('/teachers', teachersRoutes);
